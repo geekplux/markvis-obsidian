@@ -20,7 +20,7 @@
     "markvis": "file:vendor/markvis-2.2.0.tgz"
   },
   "devDependencies": {
-    "@types/node": "^20.19.43",
+    "@types/node": "^22.20.5",
     "esbuild": "^0.28.2",
     "happy-dom": "^21.0.3",
     "obsidian": "^1.14.4",

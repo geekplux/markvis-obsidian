@@ -2,7 +2,8 @@ import { existsSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import { INVALID, VALID } from "./fixtures";
+import { render } from "markvis";
+import { INVALID, THEMING, VALID } from "./fixtures";
 
 // Paths, not URL objects: happy-dom replaces the global URL class.
 const root = join(fileURLToPath(import.meta.url), "..", "..");
@@ -45,6 +46,39 @@ describe("release files", () => {
     expect(css).not.toMatch(/--markvis-font:/);
     expect(css).toMatch(/\.markvis svg\s*{[^}]*max-width:\s*100%/);
     expect(css).toMatch(/\.markvis \.markvis-error\s*{[^}]*color:\s*var\(--text-error\)/);
+  });
+});
+
+describe("theming", () => {
+  // `font` is the one name left unset on purpose: chart text keeps markvis's
+  // font unless a vault opts in (documented in styles.css and the README).
+  const OPT_IN = new Set(["font"]);
+
+  const outputs = Object.entries(THEMING).map(([type, block]) => {
+    const result = render(block);
+    if (!result.ok) throw new Error(`${type} fixture did not draw: ${result.error.code}`);
+    expect(result.chart.type).toBe(type);
+    return result.html;
+  });
+
+  it("paints a valid block through CSS variables with fallbacks", () => {
+    const html = render(VALID).html;
+    expect(html).toContain("var(--markvis-ink,");
+    expect(html).toContain("var(--markvis-series-1,");
+  });
+
+  it("declares in styles.css every variable markvis paints with", () => {
+    const css = read("styles.css").replace(/\/\*[\s\S]*?\*\//g, "");
+    const declared = new Set([...css.matchAll(/--markvis-([a-z0-9-]+)\s*:/g)].map((m) => m[1]));
+    const emitted = new Set(outputs.flatMap((html) => [...html.matchAll(/--markvis-([a-z0-9-]+)/g)].map((m) => m[1])));
+    expect(emitted.size).toBeGreaterThan(10);
+    const missing = [...emitted].filter((name) => !declared.has(name) && !OPT_IN.has(name));
+    expect(missing).toEqual([]);
+  });
+
+  it("draws grid lines from the text color, not the faint border color", () => {
+    const css = read("styles.css").replace(/\/\*[\s\S]*?\*\//g, "");
+    expect(css).toMatch(/--markvis-grid:\s*var\(--text-normal\)/);
   });
 });
 

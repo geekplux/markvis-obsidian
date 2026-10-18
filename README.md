@@ -33,7 +33,7 @@ The fence can be `chart`, `markvis`, or `vis`. If another plugin already handles
 
 ## Colors follow your theme
 
-markvis paints every color as a CSS variable with a fixed fallback, and the plugin's `styles.css` points those variables at the colors every Obsidian theme defines (`--text-normal`, `--text-muted`, `--background-primary`, `--color-accent`, `--color-blue` and the other named colors). Switch between light and dark, or to another theme, and the chart follows without a redraw. To change a color, add a CSS snippet:
+markvis paints its text, grid, background, and series colors as CSS variables with fixed fallbacks, and the plugin's `styles.css` points those variables at the colors every Obsidian theme defines (`--text-normal`, `--text-muted`, `--background-primary`, `--color-accent`, `--color-blue` and the other named colors). Switch between light and dark, or to another theme, and the chart follows without a redraw. To change a color, add a CSS snippet:
 
 ```css
 .markvis {

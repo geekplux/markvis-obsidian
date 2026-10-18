@@ -1,7 +1,8 @@
 /*
- * Charts follow the vault theme. markvis paints every color as a CSS variable
- * with a fixed fallback; this rule points those variables at the colors every
- * Obsidian theme defines, so light, dark, and custom themes need no setting.
+ * Charts follow the vault theme. markvis paints its text, grid, background,
+ * and series colors as CSS variables with fixed fallbacks; this rule points
+ * those variables at the colors every Obsidian theme defines, so light, dark,
+ * and custom themes need no setting.
  *
  * Override any of them in a CSS snippet, e.g.
  *   .markvis { --markvis-series-1: #7c3aed; }
@@ -12,7 +13,8 @@
 .markvis {
   --markvis-ink: var(--text-normal);
   --markvis-muted: var(--text-muted);
-  --markvis-grid: var(--background-modifier-border);
+  /* markvis draws grid lines from this color at a faint opacity, so it takes the text color. */
+  --markvis-grid: var(--text-normal);
   --markvis-paper: var(--background-primary);
   --markvis-plate: var(--background-primary);
   --markvis-plot: var(--background-primary);
