@@ -1,0 +1,40 @@
+/*
+ * Charts follow the vault theme. markvis paints every color as a CSS variable
+ * with a fixed fallback; this rule points those variables at the colors every
+ * Obsidian theme defines, so light, dark, and custom themes need no setting.
+ *
+ * Override any of them in a CSS snippet, e.g.
+ *   .markvis { --markvis-series-1: #7c3aed; }
+ *
+ * The font is opt-in: add `.markvis { --markvis-font: var(--font-text); }`
+ * to a snippet to draw chart text in the note font.
+ */
+.markvis {
+  --markvis-ink: var(--text-normal);
+  --markvis-muted: var(--text-muted);
+  --markvis-grid: var(--background-modifier-border);
+  --markvis-paper: var(--background-primary);
+  --markvis-plate: var(--background-primary);
+  --markvis-plot: var(--background-primary);
+  --markvis-accent: var(--color-accent);
+  --markvis-series-1: var(--color-blue);
+  --markvis-series-2: var(--color-orange);
+  --markvis-series-3: var(--color-green);
+  --markvis-series-4: var(--color-purple);
+  --markvis-series-5: var(--color-yellow);
+  --markvis-series-6: var(--color-cyan);
+  --markvis-series-7: var(--color-pink);
+  --markvis-series-8: var(--color-red);
+  --markvis-up: var(--color-green);
+  --markvis-down: var(--color-red);
+  --markvis-total: var(--text-muted);
+}
+
+.markvis figure.markvis {
+  margin: 0;
+}
+
+.markvis svg {
+  max-width: 100%;
+  height: auto;
+}

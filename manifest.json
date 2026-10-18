@@ -1,0 +1,10 @@
+{
+  "id": "markvis",
+  "name": "Markvis: charts in Markdown",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "Draw charts from a short code block: a few header lines and a CSV or Markdown table. Seventeen chart types, your theme's colors, no network. The block stays plain text, so it reads as a table anywhere else.",
+  "author": "geekplux",
+  "authorUrl": "https://github.com/geekplux",
+  "isDesktopOnly": false
+}

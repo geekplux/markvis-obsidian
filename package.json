@@ -1,0 +1,32 @@
+{
+  "name": "markvis-obsidian",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Obsidian plugin that draws markvis chart blocks in your notes.",
+  "license": "MIT",
+  "author": "geekplux",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geekplux/markvis-obsidian.git"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc --noEmit && node esbuild.config.mjs production",
+    "test": "npm run build && vitest run",
+    "version": "node version-bump.mjs && git add manifest.json versions.json"
+  },
+  "dependencies": {
+    "markvis": "file:vendor/markvis-2.2.0.tgz"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "happy-dom": "^21.0.3",
+    "obsidian": "^1.14.4",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
