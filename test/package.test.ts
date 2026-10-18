@@ -44,6 +44,7 @@ describe("release files", () => {
     // The font stays opt-in until it is checked against real vault fonts.
     expect(css).not.toMatch(/--markvis-font:/);
     expect(css).toMatch(/\.markvis svg\s*{[^}]*max-width:\s*100%/);
+    expect(css).toMatch(/\.markvis \.markvis-error\s*{[^}]*color:\s*var\(--text-error\)/);
   });
 });
 
@@ -63,10 +64,12 @@ describe("built main.js", () => {
     expect([...required]).toEqual(["obsidian"]);
   });
 
-  it("loads in a CommonJS sandbox and draws both blocks", async () => {
+  it("loads in a CommonJS sandbox, survives a taken chart fence, and draws both blocks", async () => {
     class Plugin {
       processors = new Map<string, (s: string, el: HTMLElement, ctx: { sourcePath: string }) => void>();
       registerMarkdownCodeBlockProcessor(language: string, handler: never) {
+        // Another plugin owns `chart` here; Obsidian throws on a second claim.
+        if (language === "chart") throw new Error("Code block postprocessor for language chart is already registered");
         this.processors.set(language, handler);
       }
     }
@@ -80,7 +83,7 @@ describe("built main.js", () => {
     if (!Bundled) throw new Error("main.js has no default export");
     const plugin = new Bundled();
     await plugin.onload();
-    expect([...plugin.processors.keys()]).toEqual(["chart", "markvis", "vis"]);
+    expect([...plugin.processors.keys()]).toEqual(["markvis", "vis"]);
 
     const good = document.createElement("div");
     plugin.processors.get("vis")?.(VALID, good, { sourcePath: "a.md" });

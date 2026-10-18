@@ -2,8 +2,12 @@ import { Plugin } from "obsidian";
 import type { MarkdownPostProcessorContext } from "obsidian";
 import { render } from "markvis";
 
-/** The three fence languages markvis reads. One parser sits behind all of them. */
-export const LANGUAGES = ["chart", "markvis", "vis"] as const;
+/**
+ * The three fence languages markvis reads. One parser sits behind all of them.
+ * `chart` goes last: another plugin may already own it, and the two names only
+ * markvis uses must register either way.
+ */
+export const LANGUAGES = ["markvis", "vis", "chart"] as const;
 
 /**
  * Draws one chart block into `el`.
@@ -34,9 +38,14 @@ export default class MarkvisPlugin extends Plugin {
     // One processor covers Reading view and Live Preview. It adds no listeners,
     // so there is nothing to clean up on unload.
     for (const language of LANGUAGES) {
-      this.registerMarkdownCodeBlockProcessor(language, (source, el, ctx) => {
-        drawBlock(source, el, ctx);
-      });
+      try {
+        this.registerMarkdownCodeBlockProcessor(language, (source, el, ctx) => {
+          drawBlock(source, el, ctx);
+        });
+      } catch {
+        // Obsidian throws when another plugin already registered this
+        // language. Leave that fence to it; the other names still work.
+      }
     }
   }
 }

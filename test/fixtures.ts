@@ -51,3 +51,9 @@ Mon,3
 Tue,5
 Wed,4
 `;
+
+/** A fence with nothing in it. */
+export const EMPTY = "";
+
+/** A block cut off mid-line, as while typing. */
+export const CUT = "markvis: 2\ntype: ba";

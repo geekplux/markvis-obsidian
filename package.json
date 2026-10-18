@@ -13,13 +13,14 @@
   "scripts": {
     "dev": "node esbuild.config.mjs",
     "build": "tsc --noEmit && node esbuild.config.mjs production",
-    "test": "npm run build && vitest run",
+    "test": "npm run build && tsc -p tsconfig.test.json && vitest run",
     "version": "node version-bump.mjs && git add manifest.json versions.json"
   },
   "dependencies": {
     "markvis": "file:vendor/markvis-2.2.0.tgz"
   },
   "devDependencies": {
+    "@types/node": "^20.19.43",
     "esbuild": "^0.28.2",
     "happy-dom": "^21.0.3",
     "obsidian": "^1.14.4",

@@ -23,7 +23,7 @@ Fri,190
 ```
 ````
 
-The fence can be `chart`, `markvis`, or `vis`. Seventeen chart types: `bar` `line` `area` `scatter` `pie` `hist` `heatmap` `funnel` `waterfall` `radar` `gauge` `sankey` `treemap` `dumbbell` `bullet` `boxplot` `calendar`. Leave out `title:` and the note's name is used. The block format, every type, and examples are at [markvis.js.org](https://markvis.js.org).
+The fence can be `chart`, `markvis`, or `vis`. If another plugin already handles `chart` fences, use `markvis` or `vis`. Seventeen chart types: `bar` `line` `area` `scatter` `pie` `hist` `heatmap` `funnel` `waterfall` `radar` `gauge` `sankey` `treemap` `dumbbell` `bullet` `boxplot` `calendar`. Leave out `title:` and the note's name is used. The block format, every type, and examples are at [markvis.js.org](https://markvis.js.org).
 
 ## Install
 
@@ -43,6 +43,8 @@ markvis paints every color as a CSS variable with a fixed fallback, and the plug
 ```
 
 The variables are `--markvis-ink`, `-muted`, `-grid`, `-paper`, `-plate`, `-plot`, `-accent`, `-series-1` to `-series-8`, `-up`, `-down`, and `-total`. Chart text keeps markvis's own font unless you opt in with `.markvis { --markvis-font: var(--font-text); }`.
+
+Under each chart, a caption and the full data table come with the figure by design, so the numbers stay readable and searchable next to the picture.
 
 ## Manual checklist
 
