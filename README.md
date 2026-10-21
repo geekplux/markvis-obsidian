@@ -2,8 +2,6 @@
 
 Draw charts in your notes from a short code block: a few header lines, then the numbers as CSV or a Markdown table. The chart draws in Reading view and Live Preview, in your theme's colors, with no network and no settings. The block stays plain text in the file, so it syncs, diffs, and still reads as a table in any other Markdown app; a block that cannot be drawn shows its rows as a table plus one line saying what to fix. This plugin is a thin host for [markvis](https://markvis.js.org), which defines the block and draws the SVG.
 
-**[GIF PLACEHOLDER: replace this line with `![A chart block drawing itself in a dark vault](assets/demo.gif)` from the hero recording]**
-
 ## Write a chart
 
 ````markdown
