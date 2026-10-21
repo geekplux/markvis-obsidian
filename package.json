@@ -17,7 +17,7 @@
     "version": "node version-bump.mjs && git add manifest.json versions.json"
   },
   "dependencies": {
-    "markvis": "file:vendor/markvis-2.2.0.tgz"
+    "markvis": "^2.2.0"
   },
   "devDependencies": {
     "@types/node": "^22.20.5",
