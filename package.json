@@ -1,6 +1,6 @@
 {
   "name": "markvis-obsidian",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Obsidian plugin that draws markvis chart blocks in your notes.",
   "license": "MIT",
